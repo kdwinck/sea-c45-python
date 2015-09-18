@@ -1,3 +1,4 @@
+
 def fibonacci(n):
     """
     Returns the nth number from the Fibonacci sequence.
@@ -9,18 +10,8 @@ def fibonacci(n):
         return 0
     elif n == 1:
         return 1
-    elif n == 2:
-        return 1
-    elif n == 3:
-        return 2
-    elif n == 4:
-        return 3
-    elif n == 5:
-        return 5
-    elif n == 6:
-        return 8
     else:
-        return 13
+        return fibonacci(n - 1) + fibonacci(n - 2)
 
 
 def lucas(n):
@@ -35,38 +26,21 @@ def lucas(n):
         return 2
     elif n == 1:
         return 1
-    elif n == 2:
-        return 3
-    elif n == 3:
-        return 4
-    elif n == 4:
-        return 7
-    elif n == 5:
-        return 11
-    elif n == 6:
-        return 18
     else:
-        return 29
+        return lucas(n - 1) + lucas(n - 2)
 
 
 def sum_series(n, x=0, y=1):
-    if x == 0 and y == 1:
-        fibonacci(n)
-    elif x == 2 and y == 1:
-        lucas(n)
-    elif n == 0:
-        return 10
+    """
+    Returns the nth number in a sequence with a first
+    number x and a second number y.
+
+    Example: sum_series(0, 2, 3) == 2
+             sum_series(5, 0, 1) == 5
+    """
+    if n == 0:
+        return x
     elif n == 1:
-        return 20
-    elif n == 2:
-        return 30
-    elif n == 3:
-        return 50
-    elif n == 4:
-        return 80
-    elif n == 5:
-        return 130
-    elif n == 6:
-        return 210
+        return y
     else:
-        return 340
+        return sum_series(n - 1, x, y) + sum_series(n - 2, x, y)
