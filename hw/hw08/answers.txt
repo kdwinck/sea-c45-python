@@ -1,0 +1,76 @@
+Name: Kyle Winckler
+CodeFellows Python F2
+SEA-C45
+Homework 8
+
+For each problem that requires a written answer, write (or copy-and-paste)
+your answers in this file.  When you are done, you should have replaced all
+the ellipses (the three dots) with your answers.
+
+At the end, you will turn in this file along with your modified
+dna_analysis.py program.
+
+
+Problem 1:
+
+(No answers in this file.)
+
+Problem 2:
+
+GC-content: 0.43059987061138255
+
+Problem 3:
+
+Commenting the variables out creates a NameError. Linenum and Seq are no longer
+defined so the error is thrown when it tries to reference the variables. If we
+comment out gc_count we will also get a NameError because gc_count is no longer
+defined with a value.
+
+Problem 4:
+
+AT-content: 0.5694001293886175
+
+Problem 5:
+
+G-content: 5738773
+C-content: 5879128
+A-content: 7701287
+T-content: 7661547
+
+Problem 6:
+
+All files except test-small.fastq had differneces. The difference occurs
+between the total_count and the (A, T, G, C) count.
+
+The difference is a result of other elements occuring in the sequence of
+nucleotides. For instance, the first element in sample_5.fastq is 'N', which is
+added to the total_count but not the (A, T, G, C) count.
+
+You should use the sum of the A, T, G, $ C counts as the denominator. Any other
+variables are errors that should not be taken into consideration.
+
+My program incorrectly computed the GC content because I was using total_count
+as the denominator.
+
+Problem 7:
+
+AT/GC ratio: 1.3223416174746196
+
+Problem 8:
+
+GC Classifcation: moderate GC content
+
+Collaboration:
+
+I did this assingment without assistance, although I do have a co-worker
+who runs a biotech company on the side who does PCR all the time and was
+able to explain that in more detail to me.
+
+Reflection:
+
+I learned most about making sure you are using the correct data BEFORE you
+run any calculations. I wish I had known there were other letterns contained
+within the sequences. That would have saved me a bit of time. If I were to do
+an assignment like this in the future, I hope I would calculate things more
+accurately to begin with (AKA elif "T" etc. vs else). I would tell future
+students to read carefully and go slowly so you don't miss anything.
