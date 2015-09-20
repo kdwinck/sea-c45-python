@@ -39,15 +39,15 @@ T-content: 7661547
 
 Problem 6:
 
-All files except test-small.fastq had differneces. The difference occurs
-between the total_count and the (A, T, G, C) count.
+All files except test-small.fastq had differences. The difference occurs
+between the total_count and the sum count (A + T + G + C.
 
 The difference is a result of other elements occuring in the sequence of
 nucleotides. For instance, the first element in sample_5.fastq is 'N', which is
-added to the total_count but not the (A, T, G, C) count.
+added to the total_count but not the sum count.
 
-You should use the sum of the A, T, G, $ C counts as the denominator. Any other
-variables are errors that should not be taken into consideration.
+You should use the sum count as the denominator. Any other variables are errors
+that should not be taken into consideration.
 
 My program incorrectly computed the GC content because I was using total_count
 as the denominator.
@@ -62,15 +62,15 @@ GC Classifcation: moderate GC content
 
 Collaboration:
 
-I did this assingment without assistance, although I do have a co-worker
-who runs a biotech company on the side who does PCR all the time and was
+I did this assignment without assistance, although I do have a co-worker
+who runs a biotech company on the side. He does PCR all the time and was
 able to explain that in more detail to me.
 
 Reflection:
 
 I learned most about making sure you are using the correct data BEFORE you
-run any calculations. I wish I had known there were other letterns contained
+run any calculations. I wish I had known there were other letters contained
 within the sequences. That would have saved me a bit of time. If I were to do
 an assignment like this in the future, I hope I would calculate things more
-accurately to begin with (AKA elif "T" etc. vs else). I would tell future
+accurately to begin with (AKA elif "T" etc.. vs else). I would tell future
 students to read carefully and go slowly so you don't miss anything.
