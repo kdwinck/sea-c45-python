@@ -115,9 +115,10 @@ def create_letter(str_donor, donation):
     print()
     print("Dear %s," % str_donor)
     print()
-    print("Thank you for your donation of $%s. We here at the Foundation for "
-          "Homeless Whales greatly appreciate it. Your money will go towards "
-          "creating new oceans for whales to live in." % donation)
+    print("Thank you for your donation of $%s. We here at Posters Without "
+          "Borders greatly appreciate it. Your money will go towards ending "
+          "the worldwide epidemic of posters on walls without frames."
+          % donation)
     print()
     print("Thanks again,")
     print()
@@ -140,7 +141,7 @@ def return_to_home_menu():
     if x == "":
         return home_menu()
     else:
-        return("INVALID INPUT")
+        print("INVALID INPUT")
 
 
 def create_report(donor_list):
