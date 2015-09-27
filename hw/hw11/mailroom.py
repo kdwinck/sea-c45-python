@@ -47,6 +47,7 @@ def send_thank_you():
 
     donor_name = input("> ")
     str_donor = str(donor_name)
+    names = name_list()
 
     if str_donor == "list":
         print("")
@@ -55,17 +56,18 @@ def send_thank_you():
         return send_thank_you()
     elif str_donor == "quit":
         return home_menu()
+    elif str_donor in names:
+        print(names)
+        i = 0
+        while (i < len(donor_list)):
+            if donor_list[i][0] == str_donor:
+                donation = get_donation()
+                donor_list[i][1] += donation
+                donor_list[i][2] += 1
+            i += 1
     else:
-        for donor in donor_list:
-            if donor[0] == str_donor:
-                donation = get_donation()
-                donor[1] += donation
-                donor[2] += 1
-                break
-            else:
-                donation = get_donation()
-                donor_list.append([str_donor, donation, 1])
-                break
+        donation = get_donation()
+        donor_list.append([str_donor, donation, 1])
 
     create_letter(str_donor, donation)
     return_to_home_menu()
@@ -157,6 +159,15 @@ def create_report(donor_list):
         print(line)
 
     return_to_home_menu()
+
+
+def name_list():
+    """ Creates and returns a list of names from the donor list """
+
+    name_list = []
+    for donor in donor_list:
+            name_list.append(donor[0])
+    return name_list
 
 
 if __name__ == '__main__':
