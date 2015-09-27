@@ -1,15 +1,15 @@
 def introduction():
     """ Print out the introduction for the user"""
 
-    print("")
+    print()
     print("Welcome to Mailroom Madness")
-    print("")
+    print()
     print("Choose from the following:")
-    print("")
+    print()
     print("T - Send a (T)hank You")
     print("R - Create a (R)eport")
     print("quit - Quit the program")
-    print("")
+    print()
 
 
 def home_menu():
@@ -30,25 +30,20 @@ def home_menu():
         return not_done
     else:
         print("INVALID INPUT.")
-        print("")
+        print()
         return home_menu()
-
-
-def create_report(donor_list):
-    """Prints a list of donors, sorted by total donation amount"""
-    pass
 
 
 def send_thank_you():
     """Prompt user for full name of donor"""
 
-    print("")
+    print()
     print("Please enter a name, or choose from the following: ")
-    print("")
+    print()
     print("list - Print a list of previous donors")
-    print("")
+    print()
     print("quit - Return to main menu")
-    print("")
+    print()
 
     donor_name = input("> ")
     str_donor = str(donor_name)
@@ -73,20 +68,22 @@ def send_thank_you():
                 break
 
     create_letter(str_donor, donation)
+    return_to_home_menu()
 
 
 def get_donation():
     """ Prompt user for amount of donation """
 
-    print("")
+    print()
     print("Please enter a donation amount or 'quit':")
-    print("")
+    print()
 
     donation = (input("> "))
-
-    donation = is_float(donation)
-    donation = str('%.2f' % donation)
-    return(donation)
+    if donation.lower() == 'quit':
+        return home_menu()
+    else:
+        donation = is_float(donation)
+        return(donation)
 
 
 def is_float(donation):
@@ -106,21 +103,60 @@ def is_float(donation):
 
 
 def create_letter(str_donor, donation):
-    print("")
+    """ This will create a letter to display to the user showcasing both
+        the donor and the donation amount
+
+    """
+
+    donation = str('%.2f' % donation)
+
+    print()
     print("Dear %s," % str_donor)
-    print("")
+    print()
     print("Thank you for your donation of $%s. We here at the Foundation for "
           "Homeless Whales greatly appreciate it. Your money will go towards "
           "creating new oceans for whales to live in." % donation)
-    print("")
+    print()
     print("Thanks again,")
-    print("")
+    print()
     print("Kyle Winckler")
-    print("")
+    print()
     print("Director, F.H.W")
-    print("")
+
+
+def return_to_home_menu():
+    """ This function will return you to the main menu at the end of either
+        path.
+
+    """
+
+    print()
     print("Press Enter to Continue...")
-    print("")
+    print()
+
+    x = input('> ')
+    if x == "":
+        return home_menu()
+    else:
+        return("INVALID INPUT")
+
+
+def create_report(donor_list):
+    """Prints a list of donors, sorted by total donation amount"""
+
+    donor_list.sort(key=lambda x: x[1], reverse=True)
+    print()
+    print('     Name     |     Total    | # | Average ')
+    print('______________________________________________')
+    for i in range(len(donor_list)):
+        total = ('$%.2f' % donor_list[i][1])
+        average = (donor_list[i][1] / donor_list[i][2])
+        average = str('$%.2f' % average)
+        line = line = "{}\t| {}\t| {} | {}".format(donor_list[i][0], total,
+                                                   donor_list[i][2], average)
+        print(line)
+
+    return_to_home_menu()
 
 
 if __name__ == '__main__':
@@ -132,7 +168,7 @@ if __name__ == '__main__':
         ["Luigi Mario", 1200, 1],
         ["Ellie Arroway", 1700, 2],
         ["Kevin Flynn", 1100, 2],
-        ["Severus Snape", 5, 1]
+        ["Severus Snape", 1000, 1]
     ]
 
     while not_done:
