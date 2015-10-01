@@ -4,15 +4,15 @@ import operator
 def introduction():
     """ Print out the introduction for the user"""
 
-    print()
-    print("Welcome to Mailroom Madness")
-    print()
-    print("Choose from the following:")
-    print()
-    print("T - Send a (T)hank You")
-    print("R - Create a (R)eport")
-    print("quit - Quit the program")
-    print()
+    print("""
+Welcome to Mailroom Madness
+
+Choose from the following:
+
+T - Send a (T)hank You
+R - Create a (R)eport
+quit - Quit the program
+""")
 
 
 def home_menu():
@@ -22,13 +22,18 @@ def home_menu():
     introduction()
 
     user_choice = input("> ")
-    user_choice = user_choice.upper()  # convert input to upper case
+    # user_choice = user_choice.upper()  # convert input to upper case
 
-    if user_choice == "T":
+    choices = {'thank': ('t', 'T'),
+               'report': ('r', 'R'),
+               'quit': ('quit', 'QUIT', 'q', 'e', 'exit')
+               }
+
+    if user_choice in choices['thank']:
         send_thank_you()
-    elif user_choice == "R":
+    elif user_choice in choices['report']:
         create_report(donor_list)
-    elif user_choice == "QUIT":
+    elif user_choice in choices['quit']:
         not_done = False
         return not_done
     else:
@@ -40,24 +45,28 @@ def home_menu():
 def send_thank_you():
     """Prompt user for full name of donor"""
 
-    print()
-    print("Please enter a name, or choose from the following: ")
-    print()
-    print("list - Print a list of previous donors")
-    print()
-    print("quit - Return to main menu")
-    print()
+    print("""
+Please enter a name, or choose from the following:
+
+list - Print a list of previous donors
+
+quit - Return to main menu
+""")
 
     donor_name = input("> ")
     str_donor = str(donor_name)
     names = name_list()
 
-    if str_donor == "list":
+    thank_choices = {'list': ('list', 'l', 'LIST'),
+                     'quit': ('quit, QUIT', 'q', 'e', 'exit')
+                     }
+
+    if str_donor in thank_choices['list']:
         print("")
         for key in donor_list:
             print(key)
         return send_thank_you()
-    elif str_donor == "quit":
+    elif str_donor in thank_choices['quit']:
         return home_menu()
     elif str_donor in names:
         for key in donor_list:
@@ -114,19 +123,26 @@ def create_letter(str_donor, donation):
 
     d = {'name': str_donor, 'donation': donation}
 
-    print("""
-    Dear {name},
+    letter = ("""
+Dear {name},
 
-    Thank you for your donation of {donation}. We here at Posters Without
-    Borders greatly appreciate it. Your money will go towards ending the
-    worldwide epidemic of posters on walls without frames.
+Thank you for your donation of ${donation}. We here at Posters Without
+Borders greatly appreciate it. Your money will go towards ending the
+worldwide epidemic of posters on walls without frames.
 
-    Thanks again,
+Thanks again,
 
-    Kyle Winckler
+Kyle Winckler
 
-    Director, F.H.W.
-    """.format(**d))
+Director, F.H.W.""".format(**d))
+
+    print(letter)
+
+    outfile = open((str_donor + '.txt'), 'w')
+    for line in letter:
+        outfile.write(line)
+
+    outfile.close
 
 
 def return_to_home_menu():
