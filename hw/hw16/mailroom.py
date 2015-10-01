@@ -168,15 +168,17 @@ def create_report(donor_list):
     sorted_list = sorted(donor_list.items(), key=operator.itemgetter(1),
                          reverse=True)
 
-    print()
-    print('     Name     |     Total    | # | Average ')
-    print('______________________________________________')
+    line = '{:^25} | {:^20} | {:^6} | {:^15} '
+    line = line.format('Name', 'Total', 'Amount', 'Average')
+    print(line)
+    print('_' * len(line))
     for i in range(len(sorted_list)):
         total = ('$%.2f' % sorted_list[i][1][0])
         average = (sorted_list[i][1][0]) / (sorted_list[i][1][1])
         average = str('$%.2f' % average)
-        line = "{}\t| {}\t| {} | {}".format(sorted_list[i][0], total,
-                                            sorted_list[i][1][1], average)
+        line = '{:<25} | {:^20} | {:^6} | {:<15} '
+        line = line.format(sorted_list[i][0], total,
+                           sorted_list[i][1][1], average)
         print(line)
 
     return_to_home_menu()
