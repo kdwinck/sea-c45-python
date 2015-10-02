@@ -43,5 +43,3 @@ def test_sum_series():
     assert(series.sum_series(5, 10, 20) == 130)
     assert(series.sum_series(6, 10, 20) == 210)
     assert(series.sum_series(7, 10, 20) == 340)
-
-
