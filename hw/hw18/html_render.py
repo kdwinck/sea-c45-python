@@ -15,12 +15,37 @@ class Element(object):
         self.tag = tag
         self.content = []
 
-    def append(self, string):
-        self.content.append(string)
+    def append(self, item):
+        self.content.append(item)
 
     def render(self, file_out, ind=""):
-        tab = '    '
-        file_out.write(('<{tag}>\n').format(tag=self.tag))
-        for string in self.content:
-            file_out.write(tab + string + '\n')
-        file_out.write(('</{tag}>\n').format(tag=self.tag))
+        indent = '    ' + ind
+        if (self.tag == 'html'):
+            file_out.write('<!DOCTYPE html>\n')
+        file_out.write((ind + '<{}>\n').format(self.tag))
+        for item in self.content:
+            if (type(item) != str):
+                item.render(file_out, indent)
+            else:
+                file_out.write(indent + item + '\n')
+        file_out.write((ind + '</{}>\n').format(self.tag))
+
+
+class Html(Element):
+
+    def __init__(self):
+        Element.__init__(self, "html")
+
+
+class Body(Element):
+
+    def __init__(self):
+        Element.__init__(self, "body")
+
+
+class P(Element):
+
+    def __init__(self, line=""):
+        Element.__init__(self, "p")
+        self.line = line
+        self.append(line)
