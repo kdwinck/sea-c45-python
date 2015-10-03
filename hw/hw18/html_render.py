@@ -11,14 +11,16 @@ Python class example.
 
 class Element(object):
 
-    def __init__(self, tag="html", content=None):
+    def __init__(self, tag=""):
         self.tag = tag
-        self.content = content
+        self.content = []
 
     def append(self, string):
         self.content.append(string)
 
     def render(self, file_out, ind=""):
-
-        file_out.write("<{tag}>" + '\n').format(tag=self.tag)
-        file_out.write("</{tag}" + '\n').format(tag=self.tag)
+        tab = '    '
+        file_out.write(('<{tag}>\n').format(tag=self.tag))
+        for string in self.content:
+            file_out.write(tab + string + '\n')
+        file_out.write(('</{tag}>\n').format(tag=self.tag))
