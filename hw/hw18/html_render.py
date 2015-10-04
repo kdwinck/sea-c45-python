@@ -37,6 +37,12 @@ class Html(Element):
         Element.__init__(self, "html")
 
 
+class Head(Element):
+
+    def __init__(self):
+        Element.__init__(self, "head")
+
+
 class Body(Element):
 
     def __init__(self):
@@ -48,4 +54,19 @@ class P(Element):
     def __init__(self, line=""):
         Element.__init__(self, "p")
         self.line = line
+        self.append(line)
+
+
+class OneLineTag(Element):
+
+    def render(self, file_out, ind=""):
+        file_out.write(('{ind}<{tag}>{con}</{tag}>\n')
+                       .format(ind=ind, tag=self.tag, con=self.content[0]))
+
+
+class Title(OneLineTag):
+
+    def __init__(self, line=""):
+        OneLineTag.__init__(self, "title")
+        self.line = ''
         self.append(line)
