@@ -49,6 +49,7 @@ def state_edges(election_result_rows):
 # Problem 2: Find the most recent poll row
 ###############################################################################
 
+
 def earlier_date(date1, date2):
     """
     Given two dates as strings (formatted like "Oct 06 2012"), returns True if
@@ -56,18 +57,28 @@ def earlier_date(date1, date2):
     """
     return (time.strptime(date1, "%b %d %Y") < time.strptime(date2, "%b %d %Y"))
 
+
 def most_recent_poll_row(poll_rows, pollster, state):
     """
     Given a list of *PollDataRow*s, returns the most recent row with the
     specified *Pollster* and *State*. If no such row exists, returns None.
     """
-    #TODO: Implement this function
-    pass
 
+    recent = None
 
-################################################################################
+    for row in poll_rows:
+        if (row['Pollster'] == pollster) and (row['State'] == state):
+            if (recent is None):
+                recent = row
+            else:
+                if (earlier_date(recent['Date'], row['Date'])):
+                    recent = row
+
+    return recent
+
+###############################################################################
 # Problem 3: Pollster predictions
-################################################################################
+###############################################################################
 
 def unique_column_values(rows, column_name):
     """
