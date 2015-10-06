@@ -23,38 +23,38 @@ class Element(object):
         if (self.tag == 'html'):
             file_out.write('<!DOCTYPE html>\n')
         file_out.write((ind + '<{}>\n').format(self.tag))
-        for item in self.content:
-            if (type(item) != str):
-                item.render(file_out, indent)
+        for child in self.content:
+            if (type(child) != str):
+                child.render(file_out, indent)
             else:
-                file_out.write(indent + item + '\n')
+                file_out.write(indent + child + '\n')
         file_out.write((ind + '</{}>\n').format(self.tag))
 
 
 class Html(Element):
 
     def __init__(self):
-        Element.__init__(self, "html")
+        super(Html, self).__init__(name="html")
 
 
 class Head(Element):
 
     def __init__(self):
-        Element.__init__(self, "head")
+        super(Head, self).__init__(name="head")
 
 
 class Body(Element):
 
     def __init__(self):
-        Element.__init__(self, "body")
+        super(Body, self).__init__(name="body")
 
 
 class P(Element):
 
-    def __init__(self, line=""):
-        Element.__init__(self, "p")
-        self.line = line
-        self.append(line)
+    def __init__(self, content=""):
+        super(P, self).__init__(name="p")
+        self.content = content
+        self.append(content)
 
 
 class OneLineTag(Element):
