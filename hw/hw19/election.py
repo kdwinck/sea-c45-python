@@ -80,21 +80,33 @@ def most_recent_poll_row(poll_rows, pollster, state):
 # Problem 3: Pollster predictions
 ###############################################################################
 
+
 def unique_column_values(rows, column_name):
     """
     Given a list of rows and the name of a column (a string),
     returns a set containing all values in that column.
     """
-    #TODO: Implement this function
-    pass
+
+    column_data = set()
+
+    for row in rows:
+        column_data.add(row[column_name])
+
+    return column_data
+
 
 def pollster_predictions(poll_rows):
     """
     Given a list of *PollDataRow*s, returns *PollsterPredictions*.
     For a given pollster, uses only the most recent poll for a state.
     """
-    #TODO: Implement this function
-    pass
+
+    pollsters = unique_column_values(poll_rows, 'Pollster')
+    states = unique_column_values(poll_rows, 'State')
+
+    for pollster in pollsters:
+        for state in states:
+            prediction = {}
 
 
 ################################################################################
