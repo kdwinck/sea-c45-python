@@ -104,9 +104,10 @@ def pollster_predictions(poll_rows):
     pollsters = unique_column_values(poll_rows, 'Pollster')
     states = unique_column_values(poll_rows, 'State')
 
+    result = {}
+
     for pollster in pollsters:
         for state in states:
-            prediction = {}
 
 
 ################################################################################
