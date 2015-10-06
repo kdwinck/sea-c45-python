@@ -108,11 +108,20 @@ def pollster_predictions(poll_rows):
 
     for pollster in pollsters:
         for state in states:
+            recent = most_recent_poll_row(poll_rows, pollster, state)
+            if (recent is not None):
+                edge = row_to_edge(recent)
+                if (pollster in result):
+                    result[pollster][state] = edge
+                else:
+                    result[pollster] = {state: edge}
+
+    return result
 
 
-################################################################################
+###############################################################################
 # Problem 4: Pollster errors
-################################################################################
+###############################################################################
 
 def average_error(state_edges_predicted, state_edges_actual):
     """
