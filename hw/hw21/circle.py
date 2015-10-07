@@ -22,6 +22,30 @@ class Circle(object):
     def __repr__(self):
         return 'Circle(%s)' % int(self.radius)
 
+    def __add__(self, other):
+        return Circle(self.radius + other.radius)
+
+    def __mul__(self, number):
+        return Circle(self.radius * number)
+
+    def __eq__(self, other):
+        return self.radius == other.radius
+
+    def __ne__(self, other):
+        return self.radius != other.radius
+
+    def __lt__(self, other):
+        return self.radius < other.radius
+
+    def __gt__(self, other):
+        return self.radius > other.radius
+
+    def __le__(self, other):
+        return self.radius <= other.radius
+
+    def __ge__(self, other):
+        return self.radius >= other.radius
+
     def _get_d(self):
         return self._diameter
 
