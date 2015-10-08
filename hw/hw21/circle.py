@@ -17,10 +17,10 @@ class Circle(object):
         self._area = math.pi * (radius ** 2)
 
     def __str__(self):
-        return "Circle with radius: %.6f" % self.radius
+        return "Circle with radius: {:.6f}".format(self.radius)
 
     def __repr__(self):
-        return 'Circle(%s)' % int(self.radius)
+        return 'Circle({r})'.format(r=self.radius)
 
     def __add__(self, other):
         return Circle(self.radius + other.radius)
@@ -62,5 +62,3 @@ class Circle(object):
 
     diameter = property(_get_d, _set_d, _del_d, doc="")
     area = property(_get_a, doc="")
-
-    # docstring="largest distance between two points on circle")
