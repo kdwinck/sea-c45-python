@@ -1,8 +1,8 @@
 import random
 
 
-def open_file():
-    text = open("sherlock.txt", "r")
+def open_file(text):
+    text = open(text, "r")
     return text
 
 
@@ -26,8 +26,8 @@ def create_trigrams(words):
 
 
 def create_story(trigrams):
-    word1 = 'Sherlock'
-    word2 = 'Holmes'
+    word1 = 'He'
+    word2 = 'had'
     new_book = [word1, word2]
     done = False
     while not done:
@@ -47,12 +47,13 @@ def close_file(text):
 
 
 def main():
-    text = open_file()
+    text = open_file('small_text.txt')
     words = create_words(text)
     words = list(map(str.strip, words))  # remove newline characters from
     trigrams = create_trigrams(words)
     new_book = create_story(trigrams)
     new_string = " ".join(new_book)
     print(new_string)
+    close_file(text)
 
 main()
