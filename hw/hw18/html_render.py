@@ -28,7 +28,7 @@ class Element(object):
         file_out.write("{}<{}".format(ind, self.name))
         if(self.kwargs):
             for kwargs, value in self.kwargs.items():
-                file_out.write(" {}={}".format(kwargs, value))
+                file_out.write(' {}="{}"'.format(kwargs, value))
         file_out.write(">\n")
 
         for child in self.content:
@@ -79,3 +79,22 @@ class Title(OneLineTag):
         OneLineTag.__init__(self, "title")
         self.line = ''
         self.append(line)
+
+
+class SelfClosingTag(Element):
+
+    def render(self, file_out, ind=""):
+        file_out.write(('{ind}<{name} />\n')
+                       .format(ind=ind, name=self.name, kwargs=self.kwargs))
+
+
+class Hr(SelfClosingTag):
+
+    def __init__(self):
+        super(Hr, self).__init__(name="hr")
+
+
+class Br(SelfClosingTag):
+
+    def __init__(self):
+        super(Hr, self).__init__(name="br")
