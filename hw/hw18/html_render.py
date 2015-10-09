@@ -98,3 +98,15 @@ class Br(SelfClosingTag):
 
     def __init__(self):
         super(Hr, self).__init__(name="br")
+
+
+class A(Element):
+
+    def __init__(self, link, content):
+        super(A, self).__init__(name="A")
+        self.link = link
+        self.content = content
+
+    def render(self, file_out, ind=""):
+        file_out.write(('{ind}<a href="{link}">{content}</a>\n')
+                       .format(ind=ind, link=self.link, content=self.content))
