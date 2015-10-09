@@ -11,24 +11,33 @@ Python class example.
 
 class Element(object):
 
-    def __init__(self, tag=""):
-        self.tag = tag
+    def __init__(self, name="", **kwargs):
+        self.name = name
         self.content = []
+        self.kwargs = kwargs
 
     def append(self, item):
         self.content.append(item)
 
     def render(self, file_out, ind=""):
         indent = '    ' + ind
-        if (self.tag == 'html'):
+
+        if (self.name == 'html'):
             file_out.write('<!DOCTYPE html>\n')
-        file_out.write((ind + '<{}>\n').format(self.tag))
+
+        file_out.write("{}<{}".format(ind, self.name))
+        if(self.kwargs):
+            for kwargs, value in self.kwargs.items():
+                file_out.write(" {}={}".format(kwargs, value))
+        file_out.write(">\n")
+
         for child in self.content:
             if (type(child) != str):
                 child.render(file_out, indent)
             else:
                 file_out.write(indent + child + '\n')
-        file_out.write((ind + '</{}>\n').format(self.tag))
+
+        file_out.write((ind + '</{}>\n').format(self.name))
 
 
 class Html(Element):
@@ -51,17 +60,17 @@ class Body(Element):
 
 class P(Element):
 
-    def __init__(self, content=""):
-        super(P, self).__init__(name="p")
-        self.content = content
-        self.append(content)
+    def __init__(self, line="", **kwargs):
+        super(P, self).__init__(name="p", **kwargs)
+        self.line = line
+        self.append(line)
 
 
 class OneLineTag(Element):
 
     def render(self, file_out, ind=""):
-        file_out.write(('{ind}<{tag}>{con}</{tag}>\n')
-                       .format(ind=ind, tag=self.tag, con=self.content[0]))
+        file_out.write(('{ind}<{name}>{con}</{name}>\n')
+                       .format(ind=ind, name=self.name, con=self.content[0]))
 
 
 class Title(OneLineTag):
